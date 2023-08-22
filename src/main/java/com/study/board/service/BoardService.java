@@ -18,7 +18,10 @@ public class BoardService {
     // 글 작성 처리
     public void write(Board board, MultipartFile file) throws Exception {
 
-        if (file.getOriginalFilename() != "") {
+        if (file == null || file.getOriginalFilename() == null) {
+            board.setFilename(null);
+            board.setFilepath(null);
+        } else {
             String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
 
             UUID uuid = UUID.randomUUID();
@@ -31,9 +34,6 @@ public class BoardService {
 
             board.setFilename(fileName);
             board.setFilepath("/files/" + fileName);
-        } else {
-            board.setFilename(null);
-            board.setFilepath(null);
         }
 
         boardRepository.save(board);
