@@ -21,10 +21,17 @@ public class BoardController {
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board) {
-        boardService.write(board);
+    public String boardWritePro(Board board, Model model) {
+        if (!board.getTitle().isEmpty() && !board.getContent().isEmpty()) {
+            boardService.write(board);
+            model.addAttribute("messege", "글 작성이 완료되었습니다!");
+        } else {
+            model.addAttribute("messege", "글 작성에 실패했습니다 ㅠ");
+        }
 
-        return "";
+        model.addAttribute("serchUrl", "/board/list");
+
+        return "messege";
     }
 
     @GetMapping("/board/list")
