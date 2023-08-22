@@ -22,9 +22,13 @@ public class BoardController {
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board, Model model, MultipartFile responseFile) throws Exception {
+    public String boardWritePro(Board board, Model model, MultipartFile file) throws Exception {
         if (!board.getTitle().isEmpty() && !board.getContent().isEmpty()) {
-            boardService.write(board, responseFile);
+            if (file.getOriginalFilename() == null) {
+                boardService.write(board, null);
+            } else {
+                boardService.write(board, file);
+            }
             model.addAttribute("messege", "글 작성이 완료되었습니다!");
         } else {
             model.addAttribute("messege", "글 작성에 실패했습니다 ㅠ");

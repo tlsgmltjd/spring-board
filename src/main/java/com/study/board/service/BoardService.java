@@ -18,7 +18,7 @@ public class BoardService {
     // 글 작성 처리
     public void write(Board board, MultipartFile file) throws Exception {
 
-        if (file == null || file.getOriginalFilename() == null) {
+        if (file.getOriginalFilename().isEmpty()) {
             board.setFilename(null);
             board.setFilepath(null);
         } else {
