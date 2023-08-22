@@ -36,9 +36,10 @@
 
 <body>
     <div class = "container">
-        <form class = "layout" action = "/board/writepro" method="post">
+        <form class = "layout" action = "/board/writepro" method="post" enctype = "multipart/form-data">
             <input name = "title" type = "text"/>
             <textarea name = "content" class = "input-content"></textarea>
+            <input name = "responseFile" type = "file"/>
             <button type = "submit" class = "button">작성</button>
         </form>
     </div>
