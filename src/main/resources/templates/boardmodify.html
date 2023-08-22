@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 수정 폼</title>
+</head>
+
+<style>
+    .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .layout {
+        width: 500px;
+        margin: 200px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .input-content {
+        height: 50px;
+    }
+    .button {
+        width: 100px;
+        height: 30px;
+        margin: 20px auto;
+        border-radius: 8px;
+        border: 1px solid black;
+        background-color: rgba(0,0,0,0);
+        cursor: pointer;
+    }
+</style>
+
+<body>
+<div class = "container">
+    <form class = "layout" th:action="@{/board/update/{id}(id = ${board.id})}" method="post">
+        <input name = "title" type = "text" th:value="${board.title}"/>
+        <textarea name = "content" class = "input-content" th:text="${board.content}"></textarea>
+        <button type = "submit" class = "button">수정</button>
+    </form>
+</div>
+</body>
+</html>
