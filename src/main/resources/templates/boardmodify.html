@@ -39,6 +39,7 @@
     <form class = "layout" th:action="@{/board/update/{id}(id = ${board.id})}" method="post">
         <input name = "title" type = "text" th:value="${board.title}"/>
         <textarea name = "content" class = "input-content" th:text="${board.content}"></textarea>
+        <span>수정하면 업로드된 이미지 삭제됨</span>
         <button type = "submit" class = "button">수정</button>
     </form>
 </div>

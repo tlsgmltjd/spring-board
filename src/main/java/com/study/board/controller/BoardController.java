@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+
 @Controller
 public class BoardController {
     @Autowired
@@ -24,7 +26,7 @@ public class BoardController {
     @PostMapping("/board/writepro")
     public String boardWritePro(Board board, Model model, MultipartFile file) throws Exception {
         if (!board.getTitle().isEmpty() && !board.getContent().isEmpty()) {
-            if (file.getOriginalFilename() == null) {
+            if (file.getOriginalFilename() == "") {
                 boardService.write(board, null);
             } else {
                 boardService.write(board, file);
@@ -68,12 +70,12 @@ public class BoardController {
     }
 
     @PostMapping("/board/update/{id}")
-    public String boardUpdate(@PathVariable("id") int id, Board board, MultipartFile file) throws Exception {
+    public String boardUpdate(@PathVariable("id") int id, Board board) throws Exception {
         Board boardTemp = boardService.boardView(id);
         boardTemp.setTitle(board.getTitle());
         boardTemp.setContent(board.getContent());
 
-        boardService.write(boardTemp, file);
+        boardService.write(boardTemp, null);
 
         return "redirect:/board/list";
     }
