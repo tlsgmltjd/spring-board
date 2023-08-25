@@ -16,6 +16,7 @@
 </style>
 <body>
     <div class = "container">
+        <a th:href="@{/board/write}">글 적기</a>
         <table class = "table">
             <thead>
                 <tr>
@@ -29,6 +30,12 @@
                     <td>
                         <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
                     </td>
+                    <td>
+                        <p th:text="${board.likes}"></p>
+                    </td>
+                    <td>
+                        <a th:href="@{/board/likes(id=${board.id}}">좋아요</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -41,6 +48,7 @@
             <input type = "text" name = "searchKeyword"/>
             <button type = "submit">검색</button>
         </form>
+
     </div>
 </body>
 </html>

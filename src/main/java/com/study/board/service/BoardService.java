@@ -2,6 +2,7 @@ package com.study.board.service;
 
 import com.study.board.entity.Board;
 import com.study.board.repository.BoardRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -60,4 +62,14 @@ public class BoardService {
     public void boardDelete(int id) {
         boardRepository.deleteById(id);
     }
-}
+
+    public void boardLikes(int id) {
+        Optional<Board> boardOptional = boardRepository.findById(id);
+
+            Board board = boardOptional.get();
+            board.setLikes(board.getLikes() + 1);
+            boardRepository.save(board);
+
+    }
+    }
+

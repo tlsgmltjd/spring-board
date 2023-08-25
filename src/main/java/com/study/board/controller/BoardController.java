@@ -86,6 +86,13 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @GetMapping("/board/likes")
+    public String boardLikes(int id) {
+        boardService.boardLikes(id);
+
+        return "redirect:/board/list";
+    }
+
     @GetMapping("/board/modify/{id}")
     public String baordModify(@PathVariable("id") int id, Model model) {
         model.addAttribute("board", boardService.boardView(id));
